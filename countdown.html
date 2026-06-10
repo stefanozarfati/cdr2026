@@ -19,55 +19,38 @@
 
   .container {
     text-align: center;
-    padding: 24px 16px;
+    padding: 6px 12px;
     width: 100%;
   }
 
-  .label-top {
-    color: #c8e6c9;
-    font-size: clamp(10px, 2vw, 14px);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
   .title {
-    color: #ffffff;
-    font-size: clamp(14px, 3vw, 22px);
+    color: #c8e6c9;
+    font-size: clamp(9px, 2vw, 13px);
     font-weight: bold;
-    letter-spacing: 0.05em;
-    margin-bottom: 28px;
-  }
-
-  /* Separatore arancio */
-  .divider {
-    width: 60px;
-    height: 3px;
-    background: #ff6d00;
-    margin: 0 auto 28px;
-    border-radius: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
   }
 
   .blocks {
     display: flex;
     justify-content: center;
-    gap: clamp(8px, 3vw, 24px);
-    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: clamp(4px, 2vw, 16px);
   }
 
   .block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: clamp(56px, 18vw, 110px);
+    min-width: clamp(44px, 14vw, 90px);
   }
 
   .number {
-    font-size: clamp(36px, 12vw, 80px);
+    font-size: clamp(28px, 10vw, 52px);
     font-weight: 900;
     color: #ffffff;
     line-height: 1;
-    letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
     min-width: 2ch;
     text-align: center;
@@ -75,66 +58,49 @@
 
   .unit {
     color: #ff6d00;
-    font-size: clamp(9px, 2vw, 13px);
+    font-size: clamp(7px, 1.4vw, 10px);
     font-weight: bold;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-top: 6px;
+    margin-top: 3px;
   }
 
-  /* Separatore : tra blocchi */
   .sep {
-    color: rgba(255,255,255,0.35);
-    font-size: clamp(28px, 9vw, 60px);
+    color: rgba(255,255,255,0.3);
+    font-size: clamp(22px, 8vw, 44px);
     font-weight: 900;
     line-height: 1;
-    align-self: flex-start;
-    margin-top: 4px;
-    padding-top: 2px;
+    padding-top: 1px;
   }
 
-  /* Messaggio in corso */
   .in-corso {
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
   }
 
-  .in-corso .icon {
-    font-size: clamp(32px, 10vw, 56px);
-  }
+  .in-corso .icon { font-size: clamp(24px, 7vw, 40px); }
 
   .in-corso .msg {
     color: #ffffff;
-    font-size: clamp(18px, 5vw, 32px);
+    font-size: clamp(16px, 4vw, 26px);
     font-weight: bold;
-    letter-spacing: 0.04em;
   }
 
-  .in-corso .sub {
-    color: #c8e6c9;
-    font-size: clamp(10px, 2.5vw, 15px);
-    letter-spacing: 0.1em;
-  }
-
-  /* Data evento in fondo */
   .event-date {
-    margin-top: 24px;
-    color: rgba(255,255,255,0.45);
-    font-size: clamp(9px, 1.8vw, 12px);
-    letter-spacing: 0.12em;
+    margin-top: 6px;
+    color: rgba(255,255,255,0.4);
+    font-size: clamp(8px, 1.4vw, 10px);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="label-top">Mancano all'inizio del</div>
-  <div class="title">Campionato delle Regioni d'Italia 2026</div>
-  <div class="divider"></div>
+  <div class="title">Mancano al Campionato delle Regioni d'Italia 2026</div>
 
-  <!-- Conto alla rovescia -->
   <div class="blocks" id="countdown">
     <div class="block">
       <div class="number" id="days">--</div>
@@ -157,54 +123,37 @@
     </div>
   </div>
 
-  <!-- Messaggio in corso -->
   <div class="in-corso" id="inCorso">
     <div class="icon">🏅</div>
     <div class="msg">Campionato in corso!</div>
-    <div class="sub">Fiuggi / Piglio (FR) — 28–30 Agosto 2026</div>
   </div>
 
   <div class="event-date" id="eventDate">28 agosto 2026 · ore 14:30 · Fiuggi (FR)</div>
 </div>
 
 <script>
-  // Inizio: 28 agosto 2026 ore 14:30 ora italiana (UTC+2 in estate)
   const START = new Date('2026-08-28T14:30:00+02:00');
-  // Fine campionato: 30 agosto 2026 ore 13:00
   const END   = new Date('2026-08-30T13:00:00+02:00');
 
-  function pad(n) {
-    return String(n).padStart(2, '0');
-  }
+  function pad(n) { return String(n).padStart(2, '0'); }
 
   function tick() {
     const now  = new Date();
     const diff = START - now;
 
     if (diff > 0) {
-      // Conto alla rovescia attivo
-      const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent    = days;
-      document.getElementById('hours').textContent   = pad(hours);
-      document.getElementById('minutes').textContent = pad(minutes);
-      document.getElementById('seconds').textContent = pad(seconds);
-
+      document.getElementById('days').textContent    = Math.floor(diff / 86400000);
+      document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+      document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+      document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
     } else {
-      // Campionato iniziato
-      document.getElementById('countdown').style.display = 'none';
-      document.getElementById('inCorso').style.display   = 'flex';
-
-      // Aggiorna sottotitolo se è già finito
+      document.getElementById('countdown').style.display  = 'none';
+      document.getElementById('inCorso').style.display    = 'flex';
+      document.getElementById('eventDate').style.display  = 'none';
       if (now > END) {
-        document.getElementById('inCorso').querySelector('.msg').textContent = 'Campionato concluso!';
+        document.getElementById('inCorso').querySelector('.msg').textContent  = 'Campionato concluso!';
         document.getElementById('inCorso').querySelector('.icon').textContent = '🏆';
       }
-
-      document.getElementById('eventDate').style.display = 'none';
     }
   }
 
