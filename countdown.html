@@ -12,7 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     font-family: 'Arial', sans-serif;
     overflow: hidden;
   }
@@ -25,11 +26,11 @@
 
   .title {
     color: #c8e6c9;
-    font-size: clamp(9px, 2vw, 13px);
+    font-size: clamp(9px, min(2.6vw, 5vh), 13px);
     font-weight: bold;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: clamp(2px, 1.5vh, 6px);
   }
 
   .blocks {
@@ -47,7 +48,7 @@
   }
 
   .number {
-    font-size: clamp(28px, 10vw, 52px);
+    font-size: clamp(22px, min(10vw, 26vh), 52px);
     font-weight: 900;
     color: #ffffff;
     line-height: 1;
@@ -58,7 +59,7 @@
 
   .unit {
     color: #ff6d00;
-    font-size: clamp(7px, 1.4vw, 10px);
+    font-size: clamp(7px, min(1.6vw, 4vh), 10px);
     font-weight: bold;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -67,7 +68,7 @@
 
   .sep {
     color: rgba(255,255,255,0.3);
-    font-size: clamp(22px, 8vw, 44px);
+    font-size: clamp(18px, min(8vw, 22vh), 44px);
     font-weight: 900;
     line-height: 1;
     padding-top: 1px;
@@ -89,9 +90,9 @@
   }
 
   .event-date {
-    margin-top: 6px;
+    margin-top: clamp(2px, 1.5vh, 6px);
     color: rgba(255,255,255,0.4);
-    font-size: clamp(8px, 1.4vw, 10px);
+    font-size: clamp(7px, min(1.6vw, 4vh), 10px);
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
